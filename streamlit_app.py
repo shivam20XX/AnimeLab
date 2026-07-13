@@ -2,7 +2,7 @@ import streamlit as st
 from pathlib import Path
 from components.hero import render_hero
 from components.anime_grid import render_anime_section
-from pages.home import render_home
+from views.home import render_home
 
 from api.anilist import (
     get_trending_anime,
@@ -12,7 +12,7 @@ from api.anilist import (
     search_anime,
 )
 from components.anime_card import anime_card, get_title
-from pages.anime_detail import render_anime_detail
+from views.anime_detail import render_anime_detail
 
 
 ##?----- CSS Loader -----
