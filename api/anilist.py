@@ -189,3 +189,72 @@ def get_new_releases(per_page=20):
         ["START_DATE_DESC"],
         per_page,
     )
+    
+    
+ANIME_SEARCH_QUERY = """
+query ($search: String, $page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
+        media(
+            search: $search
+            type: ANIME
+            isAdult: false
+            sort: SEARCH_MATCH
+        ) {
+            id
+
+            title {
+                english
+                romaji
+            }
+
+            coverImage {
+                extraLarge
+                large
+            }
+
+            bannerImage
+            averageScore
+            episodes
+            genres
+            seasonYear
+            status
+            description(asHtml: false)
+        }
+    }
+}
+"""
+
+
+@st.cache_data(ttl=1800)
+def search_anime(search_text, per_page=20):
+    search_text = search_text.strip()
+
+    if not search_text:
+        return []
+
+    response = requests.post(
+        ANILIST_API_URL,
+        json={
+            "query": ANIME_SEARCH_QUERY,
+            "variables": {
+                "search": search_text,
+                "page": 1,
+                "perPage": per_page,
+            },
+        },
+        timeout=15,
+    )
+
+    if not response.ok:
+        raise RuntimeError(
+            f"AniList search failed: {response.text}"
+        )
+
+    payload = response.json()
+
+    if payload.get("errors"):
+        raise RuntimeError(payload["errors"])
+
+    return payload["data"]["Page"]["media"]    
+    
+    

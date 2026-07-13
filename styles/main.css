@@ -1,0 +1,368 @@
+.anime-poster-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #11141c;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.anime-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.anime-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 14px;
+    box-sizing: border-box;
+    background: linear-gradient(
+        to top,
+        rgba(5,7,12,0.98) 0%,
+        rgba(5,7,12,0.65) 25%,
+        transparent 60%
+    );
+}
+
+.anime-card-title {
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 7px;
+}
+
+.anime-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #d1d5db;
+    font-size: 12px;
+}
+
+.anime-poster-wrap:hover {
+    transform: translateY(-5px);
+    border-color: #a855f7;
+}
+
+.anime-poster-wrap:hover .anime-poster {
+    transform: scale(1.06);
+}
+    
+    .anime-card-link {
+    display: block;
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer;
+}
+
+.anime-card-link:hover {
+    text-decoration: none !important;
+}
+    
+    
+    
+    
+    .stApp {
+        background:
+            radial-gradient(
+                circle at 70% 0%,
+                #19102e 0%,
+                #090b12 32%,
+                #05070c 70%
+            );
+    }
+
+    [data-testid="stSidebar"] {
+        background: #080b12;
+        border-right: 1px solid #1c2230;
+    }
+
+    [data-testid="stSidebar"] h1 {
+        color: #a855f7;
+    }
+
+    .block-container {
+        padding-top: 4rem;
+        padding-bottom: 5rem;
+    }
+
+    .hero {
+        min-height: 390px;
+
+        padding:
+            70px
+            50px;
+
+        border-radius: 20px;
+
+        background-size: cover;
+        background-position: center;
+
+        display: flex;
+        align-items: flex-end;
+
+        margin-bottom: 35px;
+
+        box-shadow:
+            0 25px 80px
+            rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+        max-width: 620px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+
+        background: #7c3aed;
+
+        padding: 6px 12px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        margin-bottom: 12px;
+    }
+
+    .hero-title {
+        font-size: 52px;
+        font-weight: 800;
+
+        line-height: 1;
+
+        margin-bottom: 15px;
+    }
+
+    .hero-meta {
+        color: #d4d4d8;
+        margin-bottom: 15px;
+    }
+
+    .hero-description {
+        color: #c4c4cc;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .anime-title {
+        font-weight: 700;
+
+        font-size: 15px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        margin-top: 7px;
+    }
+
+    .anime-meta {
+        color: #9ca3af;
+
+        font-size: 13px;
+
+        margin-top: 4px;
+        margin-bottom: 8px;
+    }
+
+    [data-testid="stImage"] img {
+        border-radius: 12px;
+    }
+    
+    .detail-banner {
+    width: 100%;
+    height: 380px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: -100px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+}
+
+.detail-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-top: 110px;
+    margin-bottom: 25px;
+}
+
+.detail-info-card {
+    padding: 20px;
+    margin: 20px 0;
+
+    background: rgba(17, 20, 28, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+}
+
+.detail-info-card {
+    padding: 22px 26px;
+    margin: 20px 0;
+    background: rgba(17, 20, 28, 0.88);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 18px;
+}
+
+.detail-info-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    column-gap: 40px;
+    row-gap: 22px;
+    width: 100%;
+}
+
+.detail-info-item {
+    display: flex !important;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.info-label {
+    display: block;
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.info-value {
+    display: block;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.detail-genres {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.genre-text {
+    display: block;
+    margin-top: 8px;
+    color: #d8b4fe;
+    font-size: 15px;
+}
+
+@media (max-width: 800px) {
+    .detail-info-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+.episode-card-link {
+    display: block;
+    color: inherit !important;
+    text-decoration: none !important;
+    margin-bottom: 22px;
+}
+
+.episode-card-link:hover {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.episode-card {
+    overflow: hidden;
+    background: rgba(17, 20, 28, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.episode-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168, 85, 247, 0.65);
+}
+
+.episode-thumbnail-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+.episode-thumbnail {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.episode-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.episode-card:hover .episode-play-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.episode-play-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: white;
+    font-size: 20px;
+}
+
+.episode-card-body {
+    padding: 12px 14px 14px;
+}
+
+.episode-number {
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.episode-title {
+    margin-top: 5px;
+    color: #9ca3af;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

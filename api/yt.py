@@ -101,20 +101,41 @@ def extract_episode_number(title):
 
 
 def extract_season_episode(title):
-    match = re.search(
+    patterns = [
+        # (S1E01)
         r"\(S(\d+)E(\d+)\)",
+
+        # S1E01 without brackets
+        r"\bS(\d+)E(\d+)\b",
+
+        # Season 1 Episode 01
+        r"Season\s*(\d+).*?Episode\s*(\d+)",
+    ]
+
+    for pattern in patterns:
+        match = re.search(
+            pattern,
+            title,
+            re.IGNORECASE,
+        )
+
+        if match:
+            return (
+                int(match.group(1)),
+                int(match.group(2)),
+            )
+
+
+    match = re.search(
+        r"\bEpisode\s*(\d+)\b",
         title,
         re.IGNORECASE,
     )
 
     if match:
-        season = int(match.group(1))
-        episode = int(match.group(2))
+        return 1, int(match.group(1))
 
-        return season, episode
-
-    return None, None 
-
+    return None, None
 
 
 def group_videos_by_season(videos):
@@ -122,22 +143,24 @@ def group_videos_by_season(videos):
 
     for video in videos:
         season, episode = extract_season_episode(
-            video["title"]
+            video.get("title", "")
         )
 
-        if season is None:
+        if season is None or episode is None:
             continue
 
-        video["season_number"] = season
-        video["season_episode"] = episode
+        item = video.copy()
 
-        if season not in seasons:
-            seasons[season] = []
+        item["season_number"] = season
+        item["season_episode"] = episode
 
-        seasons[season].append(video)
+        seasons.setdefault(
+            season,
+            [],
+        ).append(item)
 
-    for season in seasons:
-        seasons[season].sort(
+    for season_videos in seasons.values():
+        season_videos.sort(
             key=lambda video: video["season_episode"]
         )
 
