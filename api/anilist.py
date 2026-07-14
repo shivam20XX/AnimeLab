@@ -152,6 +152,50 @@ def get_anime_details(anime_id):
     return payload["data"]["Media"]
 
 
+EXPLORE_ANIME_QUERY = """
+query (
+    $page: Int,
+    $perPage: Int,
+    $genre: String,
+    $seasonYear: Int,
+    $season: MediaSeason,
+    $sort: [MediaSort]
+) {
+    Page(page: $page, perPage: $perPage) {
+        media(
+            type: ANIME
+            isAdult: false
+            genre: $genre
+            seasonYear: $seasonYear
+            season: $season
+            sort: $sort
+        ) {
+            id
+
+            title {
+                english
+                romaji
+            }
+
+            coverImage {
+                extraLarge
+                large
+            }
+
+            bannerImage
+            averageScore
+            episodes
+            genres
+            season
+            seasonYear
+            status
+            description(asHtml: false)
+        }
+    }
+}
+"""
+
+
 
 def fetch_anime(sort, per_page=20):
     response = requests.post(
@@ -257,4 +301,45 @@ def search_anime(search_text, per_page=20):
 
     return payload["data"]["Page"]["media"]    
     
-    
+
+
+@st.cache_data(ttl=3600)
+def explore_anime(
+    genre=None,
+    year=None,
+    season=None,
+    sort="POPULARITY_DESC",
+    page=1,
+    per_page=20,
+):
+    response = requests.post(
+        ANILIST_API_URL,
+        json={
+            "query": EXPLORE_ANIME_QUERY,
+            "variables": {
+                "page": page,
+                "perPage": per_page,
+                "genre": genre,
+                "seasonYear": year,
+                "season": season,
+                "sort": [sort],
+            },
+        },
+        timeout=15,
+    )
+
+    if not response.ok:
+        raise RuntimeError(
+            f"AniList Explore request failed: {response.text}"
+        )
+
+    payload = response.json()
+
+    if payload.get("errors"):
+        raise RuntimeError(
+            payload["errors"][0]["message"]
+        )
+
+    return payload["data"]["Page"]["media"]
+
+

@@ -3,6 +3,7 @@ from pathlib import Path
 from components.hero import render_hero
 from components.anime_grid import render_anime_section
 from views.home import render_home
+from views.render_explore import render_explore
 
 from api.anilist import (
     get_trending_anime,
@@ -34,20 +35,19 @@ st.set_page_config(
 load_css("styles/main.css")
 
 
-@st.cache_data(ttl=3600)
-def load_homepage_data():
-    return {
-        "trending": get_trending_anime(25),
-        "popular": get_popular_anime(50),
-        "new": get_new_releases(30),
-    }
+# @st.cache_data(ttl=3600)
+# def load_homepage_data():
+#     return {
+#         "trending": get_trending_anime(25),
+#         "popular": get_popular_anime(50),
+#         "new": get_new_releases(30),
+#     }
 
+# data = load_homepage_data()
 
-data = load_homepage_data()
-
-trending = data["trending"]
-popular = data["popular"]
-new_releases = data["new"]
+# trending = data["trending"]
+# popular = data["popular"]
+# new_releases = data["new"]
 
 selected_anime_id = st.query_params.get("anime")
 
@@ -62,18 +62,18 @@ if selected_anime_id:
     render_anime_detail(selected_anime)
     st.stop()
 
-
-    for video in videos:
-     st.write(
-        video["title"],
-        "—",
-        video["channel"],
-        "—",
-        video["channel_id"],
-    )
+    # for video in videos:
+    #  st.write(
+    #     video["title"],
+    #     "—",
+    #     video["channel"],
+    #     "—",
+    #     video["channel_id"],
+    # )
+     
 
 # --------------------
-# Sidebar
+#? Sidebar
 # --------------------
 
 with st.sidebar:
@@ -102,8 +102,16 @@ with st.sidebar:
 
     st.caption("Powered by AniList")
 
+
+
+if page == "Explore":
+    render_explore()
+    st.stop()
+
+
+
 # --------------------
-# Header
+#?------------ Header
 # --------------------
 
 header_left, header_right = st.columns(
@@ -151,7 +159,7 @@ if selected_anime_id:
     st.write("Selected AniList ID:", selected_anime_id)
 
 # --------------------
-# Search Results
+#?----- Search Results
 # --------------------
     if search.strip():
 
